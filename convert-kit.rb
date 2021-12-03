@@ -2,26 +2,27 @@
 
 # This kit converter converts Borland Genetics phased kits to MyHeritage format for re-upload.
 # You will need:
-# - Your Phased kit from Borland Genetics
+# - Your Phased kit from Borland Genetics (standard download)
 # - Your MyHeritage kit (.csv)
-# Run the conversion as follows: ruby convert_kit.rb <borland_kit_file> <myheritage_kit_file> > new_kit.csv
-# Now... MyHeritage doesn't allow uploading of MyHeritage kits. It does support 23andme though.
-# I've used https://dnagenics.com/RawConverter/RawConverter to convert from MyHeritage to 23andme format.
-# You can upload the 23andme file to MyHeritage
+# Run the conversion as follows: ruby convert_kit.rb <maternal|paternal> <borland_kit_file> <myheritage_kit_file> > new_kit.csv
+# I've used https://dnagenics.com/RawConverter/RawConverter to convert from MyHeritage to FTDNA format.
+# You can upload the FTDNA file to MyHeritage
 
 require "csv"
 
-borland_kit = ARGV[0]
-myheritage_kit = ARGV[1]
+kit_gender = ARGV[0]
+borland_kit = ARGV[1]
+myheritage_kit = ARGV[2]
 
 begin
+  raise "Either `paternal` or `maternal` is required for Borland kit" unless %w(paternal maternal).include?(kit_gender)
   raise "Borland kit filename required" unless borland_kit
   raise "MyHeritage kit filename required" unless myheritage_kit
   raise "File not found `#{borland_kit}`" unless File.file?(borland_kit)
   raise "File not found `#{myheritage_kit}`" unless File.file?(myheritage_kit)
 rescue => error
   puts "Error: #{error}"
-  puts "Usage: ./convert_kit.rb <borland_kit.txt> <myheritage_kit.csv>"
+  puts "Usage: ./convert_kit.rb <paternal|maternal> <borland_kit.txt> <myheritage_kit.csv>"
   exit(255)
 end
 
@@ -75,7 +76,12 @@ myheritage.each do |item|
   next if item[0] =~ /^RSID/
   rsid, chromosome, position, result = item
   if(!borland_reference_map[rsid])
-    puts "\"#{rsid}\",\"#{chromosome}\",\"#{position}\",\"#{result}\""
+    kit_chromo = kit_gender == "maternal" ? "X" : "Y" 
+    if(reference_map[rsid][:chromosome] == kit_chromo)
+      puts "\"#{rsid}\",\"#{chromosome}\",\"#{position}\",\"#{reference_map[rsid][:result]}\""
+    else
+      puts "\"#{rsid}\",\"#{chromosome}\",\"#{position}\",\"--\""
+    end
   else
     borland_rsid = borland_reference_map[rsid]
     chromosome = borland_rsid[:chromosome]
