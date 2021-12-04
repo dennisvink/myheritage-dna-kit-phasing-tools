@@ -6,7 +6,10 @@
 # - Your MyHeritage kit (.csv)
 # Run the conversion as follows: ruby borland2myheritage.rb <maternal|paternal> <borland_kit_file> <myheritage_kit_file> > new_kit.csv
 # I've used https://dnagenics.com/RawConverter/RawConverter to convert from MyHeritage to FTDNA format.
-# You can upload the FTDNA file to MyHeritage
+# You can upload the FTDNA file to MyHeritage. You can also use the myheritage2ftdna.rb script to do the conversion.
+#
+# Submitted to the public domain
+# Written by: Dennis Vink <dennis@drvink.com>
 
 require "csv"
 
