@@ -1,4 +1,18 @@
-# Borland Genetics Phased Kit to MyHeritage Converter
+# MyHeritage DNA Kit Phasing Tools
+
+Recently I came across the website "Borland Genetics". It has a set of tools, including a DNA Kit Phasing tool. When you have the raw DNA of both parents and child available, the website allows you to construct a new DNA kit with only the DNA of the respective parents.
+
+What I wanted to achieve was being able to see which matches are my paternal matches and which matches are my maternal matches, on MyHeritage: the genealogy website I use the most.
+
+Borland Genetics lets you download the generated kit, but its format is not supported by MyHeritage, alas. Thus I started to write some conversion scripts. You can't upload MyHeritage raw DNA files to MyHeritage (why not?), so initially I used a website that does the conversion for me (see the Borland Genetics instructions). Eventually I wrote my own little converter. That is the myheritage2ftdna.rb script (ftdna.rb also required).
+
+- The first script converts the Borland Genetics Phased Kit to MyHeritage format.
+- The second script is my shot at writing a kit phaser which you can use directly with MyHeritage raw DNA files.
+- The third script converts MyHeritage raw DNA files to FTDNA format, which is supported by most genealogy websites.
+
+For suggestions/comments/fanmail you can open an issue, or e-mail me at dennis < a t > drvink < d o t > com
+
+## Borland Genetics Phased Kit to MyHeritage Converter
 
 This kit converter converts Borland Genetics phased kits to MyHeritage format for re-upload.
 You will need:

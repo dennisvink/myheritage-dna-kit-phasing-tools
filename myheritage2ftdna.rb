@@ -1,6 +1,14 @@
 #!/usr/bin/env ruby
 
+# MyHeritage to FTDNA Converter
+# -----------------------------
+# This script converts MyHeritage raw DNA files to FTDNA format
+#
+# Submitted to the public domain
+# Written by: Dennis Vink <dennis@drvink.com>
+
 require "csv"
+
 
 kit_file = ARGV[0]
 converted = []
