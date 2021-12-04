@@ -4,7 +4,7 @@
 # You will need:
 # - Your Phased kit from Borland Genetics (standard download)
 # - Your MyHeritage kit (.csv)
-# Run the conversion as follows: ruby convert_kit.rb <maternal|paternal> <borland_kit_file> <myheritage_kit_file> > new_kit.csv
+# Run the conversion as follows: ruby borland2myheritage.rb <maternal|paternal> <borland_kit_file> <myheritage_kit_file> > new_kit.csv
 # I've used https://dnagenics.com/RawConverter/RawConverter to convert from MyHeritage to FTDNA format.
 # You can upload the FTDNA file to MyHeritage
 
@@ -22,7 +22,7 @@ begin
   raise "File not found `#{myheritage_kit}`" unless File.file?(myheritage_kit)
 rescue => error
   puts "Error: #{error}"
-  puts "Usage: ./convert_kit.rb <paternal|maternal> <borland_kit.txt> <myheritage_kit.csv>"
+  puts "Usage: ./borland2myheritage.rb <paternal|maternal> <borland_kit.txt> <myheritage_kit.csv>"
   exit(255)
 end
 
